@@ -1,5 +1,5 @@
 <h2>Contato</h2>
-<form method="Post" action="/pages/forms/contato.php">
+<form method="post" action="/pages/forms/contato.php">
   <div class="form-floating m-1 col-4">
     <input
       type="text"
