@@ -4,7 +4,11 @@ require "../../../bootstrap.php";
 
 
 if(isEmpty()){
-  dd('preencha todos os campos');
+
+  flash('message', 'Preencha todos os campos');
+
+  header('Location:/?page=contato');
+
 } 
 
 $validate = validate([

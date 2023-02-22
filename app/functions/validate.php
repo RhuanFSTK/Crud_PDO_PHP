@@ -25,6 +25,7 @@
   }
 
   function isEmpty(){
+    
     $request = request();
 
     $empty = false;
@@ -37,6 +38,5 @@
 
     return $empty;
   }
-
 
 ?>

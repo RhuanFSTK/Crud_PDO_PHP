@@ -1,4 +1,8 @@
+
 <h2>Contato</h2>
+
+<?= get('message'); ?>
+
 <form action="/pages/forms/contato.php" method="post" >
   <div class="form-floating m-1 col-4">
     <input
