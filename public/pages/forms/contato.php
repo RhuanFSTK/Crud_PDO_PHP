@@ -7,7 +7,7 @@ if(isEmpty()){
 
   flash('message', 'Preencha todos os campos');
 
-  header('Location:/?page=contato');
+  return redirect("contato");
 
 } 
 
