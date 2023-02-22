@@ -3,6 +3,9 @@
 require "../../../bootstrap.php";
 
 
+if(isEmpty()){
+  dd('preencha todos os campos');
+} 
 
 $validate = validate([
 
