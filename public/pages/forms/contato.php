@@ -20,6 +20,17 @@ $validate = validate([
 
 ]);
 
-dd($validate->email);
+$data = [
+  'quem' => $validate->email,
+  'para' => 'rhuanfullstack@gmail.com',
+  'mensagem' => $validate->message,
+  'assunto' => $validate->subject
+];
 
-?>
+if(send($data)){
+  
+  flash('message', 'Email enviado com sucesso', 'success');
+
+  return redirect("contato");
+
+}

@@ -3,7 +3,7 @@
 
 <?= get('message'); ?>
 
-<form action="/pages/forms/contato.php" method="post" >
+<form action="/pages/forms/contato.php" method="POST" >
   <div class="form-floating m-1 col-4">
     <input
       type="text"
