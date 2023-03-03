@@ -12,15 +12,15 @@ function send(array $data){
   $email->Password = 'e9314e8056aa25';
   $email->isHTML(true);
   $email->setFrom('rhuanfullstack@gmail.com');
-  $email->FromName = $data['quem'];
-  $email->addAddress($data['para']);
-  $email->Body = $data['mensagem'];
-  $email->Subject = $data['assunto'];
+  $email->FromName = $data['who'];
+  $email->addAddress($data['for']);
+  $email->Body = $data['message'];
+  $email->Subject = $data['subject'];
   $email->AltBody = 'Para ver esse email tenha certeza de estar vendo em um programa que aceita ver HTML'; 
-  $email->MsgHTML($data['mensagem']);
+  $email->MsgHTML($data['message']);
 
 
-  $email->send(); 
+  return $email->send(); 
   /* echo $email->ErrorInfo; */
 }
 

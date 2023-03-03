@@ -1,5 +1,5 @@
 
-<h2>Contato</h2>
+<h2>Contact</h2>
 
 <?= get('message'); ?>
 
@@ -8,7 +8,7 @@
     <input
       type="text"
       class="form-control" name="name" value="" placeholder="">
-    <label for="">nome</label>
+    <label for="">Name</label>
   </div>
   <div class="form-floating m-1 col-4">
     <input
@@ -20,11 +20,11 @@
     <input
       type="text"
       class="form-control" name="subject" value="" placeholder="">
-    <label for="">Assunto</label>
+    <label for="">Subject</label>
   </div>
   <div class="form mb-3">
-    <label for="">Menssagem</label>
+    <label for="">Message</label>
     <textarea class="form-control" name="message" rows="10" cols="30" value="" ></textarea>
   </div>
-  <button class="btn btn-primary"type="submit">Enviar</button>
+  <button class="btn btn-primary"type="submit">Submit</button>
 </form>
