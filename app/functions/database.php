@@ -2,7 +2,7 @@
 
 function connect(){
 
-  $pdo = new \PDO("mysql:host=localhost;dbname=cursophp;
+  $pdo = new \PDO("mysql:host=127.0.0.1;dbname=phpFullstack;
   charset=utf8", 
   "root", 
   "root");

@@ -9,7 +9,7 @@
   <title>Curso php</title>
 </head>
 <body>
-  <h2>Curso de PHP</h2>
+  <h3>Curso de PHPFullstack</h3>
   <div class="container">
     <?php
 
