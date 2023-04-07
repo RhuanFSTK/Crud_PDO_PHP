@@ -1,0 +1,24 @@
+html,
+ body {
+   height: 100%;
+ }
+
+ body {
+  background: #0c2e45;
+  background: -webkit-linear-gradient(to right, #112d51, #111751c2);
+  background: linear-gradient(180deg, #112d51 0%, #111751c2 25%, #ffffff 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+ }
+
+ .form-signin {
+  width: 100%;
+  max-width: 430px;
+  padding: 15px;
+  margin: auto;
+  color: #000000c2;
+   
+ }

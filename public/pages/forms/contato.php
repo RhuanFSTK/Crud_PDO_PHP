@@ -1,25 +1,17 @@
 <?php 
-
-require "../../../bootstrap.php";
-
+require "../../../config.php";
 
 if(isEmpty()){
-
   flash('message', 'Fill in all fields');
-
   return redirect("contato");
-
 } 
 
 $validate = validate([
-
   'name' => 's',
   'email' => 'e',
   'subject' => 's',
   'message' => 's'
-
 ]);
-
 
 $data = [
   'who' => $validate->email,
@@ -29,10 +21,7 @@ $data = [
 ];
 
 if(send($data)){
-  
   flash('message', 'Email successfully sent', 'success');
-
   return redirect("contato");
-
 }
   

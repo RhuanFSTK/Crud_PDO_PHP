@@ -1,42 +1,32 @@
 <?php 
-
   function validate (array $fields){
-    
     $request = request();
-
     $validate = [];
-
     foreach ($fields as $field => $type){
       switch ($type) {
         case 's':
           $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_STRING );        
-          break;
+        break;
         case 'i':
           $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_NUMBER_INT);
-          break;
+        break;
         case 'e':
           $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_EMAIL);
-          break;
+        break;
       }
     }
-
     return (object) $validate;
-  
   }
 
+  /* Se algum campo do request estiver vazio a variavel $empty retorna verdadeira */
   function isEmpty(){
-    
     $request = request();
-
     $empty = false;
-
     foreach ($request as $key => $value) {
       if(empty($request[$key])){
         $empty = true;
       }
     }
-
     return $empty;
   }
-
 ?>

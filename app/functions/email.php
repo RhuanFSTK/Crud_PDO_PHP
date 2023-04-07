@@ -1,5 +1,4 @@
 <?php 
-
 function send(array $data){
   $email = new PHPMailer\PHPMailer\PHPMailer;
   $email->CharSet = 'UTF-8'; 
@@ -18,7 +17,6 @@ function send(array $data){
   $email->Subject = $data['subject'];
   $email->AltBody = 'Para ver esse email tenha certeza de estar vendo em um programa que aceita ver HTML'; 
   $email->MsgHTML($data['message']);
-
 
   return $email->send(); 
   /* echo $email->ErrorInfo; */
