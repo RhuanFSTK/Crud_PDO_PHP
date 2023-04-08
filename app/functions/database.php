@@ -1,4 +1,5 @@
 <?php 
+
 function connect(){
   $pdo = new \PDO("mysql:host=localhost;dbname=PHPFullstack;
   charset=utf8", 
@@ -36,13 +37,34 @@ function create($table, $fields){
   return $insert->execute($fields);
 }
 
+function all($table){
+  $pdo = connect();
+
+  /* Selecionar tudo da table enviada por parametro */
+  $sql = "SELECT * FROM {$table}";
+  $list = $pdo->query($sql);
+  $list->execute();
+  return $list->fetchAll();
+}
+
+
+function find($table, $field, $value){
+  $pdo = connect();
+
+  $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+
+  $sql = "SELECT * FROM {$table} ";
+  $sql.= "WHERE {$field} = :{$field};";
+
+  $find = $pdo->prepare($sql);
+  $find->bindValue($field, $value);
+  $find->execute();
+  return $find->fetch();
+}
+
 function update($data){
   /* UPDATE $table SET $fields = 'dados novo' WHERE id = '$id' AND vigente = 'S'; */
   /* $sql = "INSERT INTO {$table} "; */
-
-}
-
-function find($data){
 
 }
 
