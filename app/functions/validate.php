@@ -4,17 +4,27 @@
     $validate = [];
     foreach ($fields as $field => $type){
       switch ($type) {
-        case 's':
-          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_STRING );        
-        break;
-        case 'i':
-          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_NUMBER_INT);
+        case 'a':
+          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_ADD_SLASHES);
         break;
         case 'e':
           $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_EMAIL);
         break;
+        case 'i':
+          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_NUMBER_INT);
+        break;
+        case 's':
+          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_STRING );        
+        break;
+        case 'schar':
+          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_SPECIAL_CHARS);
+        break;
+        case 'u':
+          $validate[$field] = filter_var($request[$field], FILTER_SANITIZE_URL);
+        break;
       }
     }
+    /* Retornar um array como objeto */
     return (object) $validate;
   }
 

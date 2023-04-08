@@ -2,7 +2,7 @@
 function send(array $data){
   $email = new PHPMailer\PHPMailer\PHPMailer;
   $email->CharSet = 'UTF-8'; 
-  $email->SMTSecure = 'ssl';
+  $email->SMTSecure = 'plain'; /* ou ssl */
   $email->isSMTP(); 
   $email->Host = 'sandbox.smtp.mailtrap.io';
   $email->Port = 2525;
@@ -19,6 +19,8 @@ function send(array $data){
   $email->MsgHTML($data['message']);
 
   return $email->send(); 
+  
+  /* Para capturar algum erro no PHPmail só por a linha abaixo */
   /* echo $email->ErrorInfo; */
 }
 

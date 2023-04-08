@@ -27,11 +27,11 @@ require "../vendor/autoload.php";
         </div>
         <div class="checkbox mb-3 mt-3">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me">&nbsp;Remember me
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-dark mb-2" type="submit">Access</button>
-        <p><a href="?page=create_user">Create account</a></p>
+        <button class="btn btn-lg btn-dark mb-2 w-100 mt-1" type="submit">Access</button>
+        <p><a class="text-decoration-none text-black"href="?page=create_user">Create account</a></p>
     </form>
   </div>
 </body>

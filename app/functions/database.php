@@ -1,6 +1,6 @@
 <?php 
 function connect(){
-  $pdo = new \PDO("mysql:host=127.0.0.1;dbname=PHPFullstack;
+  $pdo = new \PDO("mysql:host=localhost;dbname=PHPFullstack;
   charset=utf8", 
   "root", 
   "root");
@@ -10,20 +10,22 @@ function connect(){
 }
 
 function create($table, $fields){
-  /* se fields não for um array, transforma em array */
+  /* Se fields(dados) não for um array, transforma em array */
   if(!is_array($fields)){
     $fields = (array) $fields;
   }
+  
   /* Montagem de query */
+  /* Inserir na table que receber de parametro dessa função */
   $sql = "INSERT INTO {$table} ";
-  $sql .= "(" . implode(', ', array_keys($fields)).")";
-  $sql .= " values (". implode(',', array_values($fields)).")";
+  /* Separa por virgula as array_keys (implode(por qual string ou simbolo separar, array_keys)) */
+  $sql.= "(". implode(', ', array_keys($fields)).", vigente)";
+  /* Valores da query com : (PDO) */
+  $sql.= " values (".":". implode(', :', array_keys($fields)).", 'S');";
 
   $pdo = connect();
 
   $insert = $pdo->prepare($sql);
-
-  dd($insert);
   return $insert->execute($fields);
 }
 

@@ -1,12 +1,20 @@
+:root{
+  --black: #120907;
+  --white: #ffffff;
+  --bg-btn: #232445;
+  --bg-dark: #555b89;
+  --bg-medium: #969de6;
+  --bg-light: #d4d7ed;
+}
+
 html,
  body {
    height: 100%;
  }
 
  body {
-  background: #0c2e45;
-  background: -webkit-linear-gradient(to right, #112d51, #111751c2);
-  background: linear-gradient(180deg, #112d51 0%, #111751c2 25%, #ffffff 100%);
+  background: var(--bg-dark);
+  background: linear-gradient(180deg,  var(--bg-dark) 5%, var(--bg-medium) 35%, var(--white) 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -19,6 +27,6 @@ html,
   max-width: 430px;
   padding: 15px;
   margin: auto;
-  color: #000000c2;
+  color: var(--black);
    
  }

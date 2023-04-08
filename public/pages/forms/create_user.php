@@ -17,12 +17,12 @@ $registered = create('users', $validate);
 dd($registered);
 
 if($registered){  
-  flash('message', 'Registered successfully', 'success');
+  flash('message', 'Registered successfully','success');
   return redirect('create_user');
 }
 
 flash('message', 'Registered error');
-/* Sendo a ultima linha no redirect, não é nescessario - Return */
+/* Sendo a ultima linha não é nescessario - return */
 redirect('create_user');
 
 
