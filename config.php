@@ -3,7 +3,7 @@ session_start();
 require "vendor/autoload.php";
 
 ?>
-<!-- Para iniciar o servidor local tem que rodar o code - php -S localhost:3333(ou o que preferir) -t public -->
+<!-- Para iniciar o servidor local tem que rodar o code - php -S localhost:3333(ou a port que preferir) -t public -->
 <!-- Sempre que incluir uma função ao autolad tem que rodar o code - composer dump-autoload -o -->
 <!-- Links -->
   <link rel="stylesheet" href="../assets/css/style.css">

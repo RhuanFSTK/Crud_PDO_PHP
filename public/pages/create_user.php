@@ -1,6 +1,3 @@
-<?php
-require "../vendor/autoload.php";
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +9,16 @@ require "../vendor/autoload.php";
 <body>
   <div class="form-signin d-flex justify-content-center">
     <div class="card col-12">
-      <div class="card-header">
-        <legend>Create account</legend>
+      <div class="card-header d-flex justify-content-between col-md-12">
+        <div>
+          <legend>Create account</legend>
+        </div>
+        <div class="">
+          <?=get('message');?>
+        </div>
       </div>
       <div class="card-body bg-light">
-        <form action="/pages/forms/create_user.php" method="POST" role="form">
+        <form action="/pages/forms/create_user.php" method="post" role="form">
           <div class="form-group">
             <label for="">Name</label>
             <input type="text" class="form-control mb-1 col-6" name="name" placeholder="">
