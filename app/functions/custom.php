@@ -1,4 +1,5 @@
 <?php 
+  /* Função var_dump */
   function dd($dump){
     var_dump($dump);
     die();
@@ -14,10 +15,12 @@
     return $_GET;
   }
 
+  /* Redirecionamento de página através do header  */
   function redirect($target){
     return header("location:/?page={$target}");
   }
-
+  
+  /* Redirecionamento de página para HOME através do header */
   function redirectToHome(){
     return header("location:/");
   }

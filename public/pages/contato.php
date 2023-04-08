@@ -1,8 +1,8 @@
 <?php
 require "../vendor/autoload.php";
-echo get('message'); 
+get('message'); 
 ?>
-
+<!-- Pagina para receber email - Support -->
 <body>
   <div class="form-signin d-flex justify-content-center">
     <div class="card col-12 bg-light">

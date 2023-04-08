@@ -6,6 +6,7 @@ if(isEmpty()){
   return redirect("contato");
 } 
 
+/* $key => $value */
 $validate = validate([
   'name' => 's',
   'email' => 'e',
@@ -21,7 +22,7 @@ $data = [
 ];
 
 if(send($data)){
-  flash('message', 'Email successfully sent', 'success');
+  flash('message', 'Email successfully send', 'success');
   return redirect("contato");
 }
   
