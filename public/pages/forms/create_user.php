@@ -14,7 +14,7 @@ $validate = validate([
 
 
 $registered = create('users', $validate);
-dd($registered);
+vd($registered);
 
 if($registered){  
   flash('message', 'Registered successfully','success');

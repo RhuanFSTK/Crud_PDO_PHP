@@ -1,7 +1,13 @@
 <?php 
-  /* Função var_dump */
-  function dd($dump){
+  /* Função var_dump + die */
+  function vd($dump){
     var_dump($dump);
+    die();
+  }
+  
+  /* função print_r + die */
+  function pr($print_r){
+    print_r($print_r);
     die();
   }
 

@@ -16,13 +16,20 @@ function create($table, $fields){
   }
   
   /* Montagem de query */
-  /* Inserir na table que receber de parametro dessa função */
+  /* Inserir na table que receber de parametro nessa função */
   $sql = "INSERT INTO {$table} ";
-  /* Separa por virgula as array_keys (implode(por qual string ou simbolo separar, array_keys)) */
   $sql.= "(". implode(', ', array_keys($fields)).", vigente)";
-  /* Valores da query com : (PDO) */
-  $sql.= " values (".":". implode(', :', array_keys($fields)).", 'S');";
+  $sql.= " values (:". implode(', :', array_keys($fields)).", 'S')";
+  $sql.= " ON DUPLICATE KEY UPDATE ";
 
+  $update_arr = array();
+  foreach ($fields as $key => $value) {
+      $update_arr[] = $key . " = VALUES(".$key.")";
+  }
+
+  $sql.= implode(', ', $update_arr);
+  $sql.= ", vigente = VALUES(vigente)";
+  $sql.= ";";
   $pdo = connect();
 
   $insert = $pdo->prepare($sql);
@@ -30,6 +37,8 @@ function create($table, $fields){
 }
 
 function update($data){
+  /* UPDATE $table SET $fields = 'dados novo' WHERE id = '$id' AND vigente = 'S'; */
+  /* $sql = "INSERT INTO {$table} "; */
 
 }
 
