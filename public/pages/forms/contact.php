@@ -23,6 +23,6 @@ $data = [
 
 if(send($data)){
   flash('message', 'Email successfully send', 'success');
-  return redirect("contato");
+  return redirect("contact");
 }
   

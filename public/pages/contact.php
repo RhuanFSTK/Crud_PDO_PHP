@@ -1,7 +1,4 @@
-<?php
-require "../vendor/autoload.php";
-get('message'); 
-?>
+<?=get('message');?>
 <!-- Pagina para receber email - Support -->
 <body>
   <div class="form-signin d-flex justify-content-center">
@@ -10,7 +7,7 @@ get('message');
         <legend>Contact</legend>
       </div>
       <div class="card-body bg-light">
-        <form action="/pages/forms/contato.php" method="POST" >
+        <form action="/pages/forms/contact.php" method="POST" >
         <div class="form-floating col-12">
           <input
             type="text"

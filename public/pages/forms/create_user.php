@@ -1,9 +1,8 @@
 <?php 
 require "../../../config.php";
-
 if(isEmpty()){
   flash('message', 'Fill in all fields');
-  return redirect("cadastrar_user");
+  return redirect("create_user");
 } 
 
 $validate = validate([
@@ -13,8 +12,9 @@ $validate = validate([
   'password' => 's'
 ]);
 
+
 $registered = create('users', $validate);
-dd($registered);
+vd($registered);
 
 if($registered){  
   flash('message', 'Registered successfully','success');

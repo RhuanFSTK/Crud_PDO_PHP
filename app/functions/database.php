@@ -1,4 +1,5 @@
 <?php 
+
 function connect(){
   $pdo = new \PDO("mysql:host=localhost;dbname=PHPFullstack;
   charset=utf8", 
@@ -16,24 +17,54 @@ function create($table, $fields){
   }
   
   /* Montagem de query */
-  /* Inserir na table que receber de parametro dessa função */
+  /* Inserir na table que receber de parametro nessa função */
   $sql = "INSERT INTO {$table} ";
-  /* Separa por virgula as array_keys (implode(por qual string ou simbolo separar, array_keys)) */
   $sql.= "(". implode(', ', array_keys($fields)).", vigente)";
-  /* Valores da query com : (PDO) */
-  $sql.= " values (".":". implode(', :', array_keys($fields)).", 'S');";
+  $sql.= " values (:". implode(', :', array_keys($fields)).", 'S')";
+  $sql.= " ON DUPLICATE KEY UPDATE ";
 
+  $update_arr = array();
+  foreach ($fields as $key => $value) {
+      $update_arr[] = $key . " = VALUES(".$key.")";
+  }
+
+  $sql.= implode(', ', $update_arr);
+  $sql.= ", vigente = VALUES(vigente)";
+  $sql.= ";";
   $pdo = connect();
 
   $insert = $pdo->prepare($sql);
   return $insert->execute($fields);
 }
 
-function update($data){
+function all($table){
+  $pdo = connect();
 
+  /* Selecionar tudo da table enviada por parametro */
+  $sql = "SELECT * FROM {$table}";
+  $list = $pdo->query($sql);
+  $list->execute();
+  return $list->fetchAll();
 }
 
-function find($data){
+
+function find($table, $field, $value){
+  $pdo = connect();
+
+  $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+
+  $sql = "SELECT * FROM {$table} ";
+  $sql.= "WHERE {$field} = :{$field};";
+
+  $find = $pdo->prepare($sql);
+  $find->bindValue($field, $value);
+  $find->execute();
+  return $find->fetch();
+}
+
+function update($data){
+  /* UPDATE $table SET $fields = 'dados novo' WHERE id = '$id' AND vigente = 'S'; */
+  /* $sql = "INSERT INTO {$table} "; */
 
 }
 

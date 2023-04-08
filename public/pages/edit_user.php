@@ -1,4 +1,11 @@
 
+<?php 
+
+$user = find('users', 'id', $_POST['id']) ;
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,37 +18,34 @@
     <div class="card col-12">
       <div class="card-header d-flex justify-content-between col-md-12">
         <div>
-          <legend>Create account</legend>
+          <legend>Edit account</legend>
         </div>
         <div class="">
           <?=get('message');?>
         </div>
       </div>
       <div class="card-body bg-light">
-        <form action="/pages/forms/create_user.php" method="post" role="form">
+        <form action="/pages/forms/update_user.php" method="post" role="form">
+          <input type="hidden" name="id" value="<?= $user->id; ?>">
           <div class="form-group">
             <label for="">Name</label>
-            <input type="text" class="form-control mb-1 col-6" name="name" placeholder="">
+            <input type="text" class="form-control mb-1 col-6" name="name" value="<?= $user->name; ?>">
           </div>
           <div class="form-group">
             <label for="">Last name</label>
-            <input type="text" class="form-control mb-1 col-6" name="lastName" placeholder="">
+            <input type="text" class="form-control mb-1 col-6" name="lastName" value="<?= $user->lastName ?>">
           </div>
           <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control mb-1 col-6" name="email" placeholder="">
-          </div>
-          <div class="form-group mb-4">
-            <label for="">Password</label>
-            <input type="text" class="form-control mb-1 col-6" name="password" placeholder="">
+            <input type="email" class="form-control mb-1 col-6" name="email" value="<?= $user->email ?>">
           </div>
           <div class="form-group d-flex flex-row-reverse">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Update</button>
           </div>
         </form>
       </div>
       <div class="card-footer d-flex flex-row-reverse col-12">
-        <button class="btn btn-danger"><a class="text-decoration-none text-light" href="/">Go back</a>
+        <button class="btn btn-danger"><a class="text-decoration-none text-light" href="?page=users">Go back</a>
       </div>
     </div>
   </div>
