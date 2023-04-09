@@ -62,9 +62,29 @@ function find($table, $field, $value){
   return $find->fetch();
 }
 
-function update($data){
-  /* UPDATE $table SET $fields = 'dados novo' WHERE id = '$id' AND vigente = 'S'; */
-  /* $sql = "INSERT INTO {$table} "; */
+function update($table, $fields, $where){
+  /* Se fields(dados) não for um array, transforma em array */
+  if(!is_array($fields)){
+    $fields = (array) $fields;
+  }
+
+  $pdo = connect();
+
+  /* Montar a query com array_map de acordo que fique key = :key (id = :id, name = :name...)  */
+  $data = array_map(function($field){
+    return "{$field} = :{$field}";
+  }, array_keys($fields));
+
+  $sql = "UPDATE {$table} SET ";
+  $sql.= implode(', ', $data);
+  $sql.= " WHERE {$where[0]} = :{$where[0]}";
+
+  /* Fazer o merge nos dois array (fields e where) */
+  $data = array_merge($fields, [$where[0]=>$where[1]]);
+
+  $update = $pdo->prepare($sql);
+  $update->execute($data);
+  return $update->rowCount();
 
 }
 

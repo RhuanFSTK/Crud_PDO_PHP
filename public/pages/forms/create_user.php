@@ -1,5 +1,7 @@
 <?php 
+
 require "../../../config.php";
+
 if(isEmpty()){
   flash('message', 'Fill in all fields');
   return redirect("create_user");

@@ -1,4 +1,4 @@
-
+<?= get('message') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

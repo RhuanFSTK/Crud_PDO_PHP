@@ -4,7 +4,7 @@
     $page = (!$page) ? 'pages/home.php' : "pages/{$page}.php";
 
     if(!file_exists($page)){
-      throw new \Exception("Something went wrong!");
+      throw new \Exception("This page does not exist");
     }
 
     return $page;

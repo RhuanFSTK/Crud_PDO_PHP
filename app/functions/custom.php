@@ -21,6 +21,17 @@
     return $_GET;
   }
 
+/*function redirectUrl($url, $data = [], $method = 'REQUEST') {
+  $form = "<form action='$url' method='$method'>";
+  foreach ($data as $key => $value) {
+    $form .= "<input type='hidden' name='$key' value='$value'>";
+  }
+  $form .= "</form>";
+  $form .= "<script>document.forms[0].submit();</script>";
+  echo $form;
+  exit;
+}*/
+
   /* Redirecionamento de página através do header  */
   function redirect($target){
     return header("location:/?page={$target}");
