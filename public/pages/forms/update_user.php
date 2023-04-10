@@ -7,7 +7,7 @@ if(isEmpty()){
   flash('message', 'Fill in all fields');
 
    return redirect("users");
-  /* return redirect("/edit_user&id=".$id); */
+  /* return redirect("edit_user&id=".$id); */
 } 
 
 $validate = validate([
@@ -21,13 +21,13 @@ $update = update('users', $validate,['id', $id]);
 if($update){  
   flash('message', 'Successfully updated','success');
   return redirect("users");
-  /* return redirect("/edit_user&id=".$id); */
+  /* return redirect("edit_user&id=".$id); */
 }
 
 flash('message', 'Error when updating');
 /* Sendo a ultima linha não é nescessario - return */
 return redirect("users");
-/* redirect("/edit_user&id=".$id); */
+/* redirect("edit_user&id=".$id); */
 
 return $id;
 ?>

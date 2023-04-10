@@ -11,6 +11,8 @@ function connect(){
 }
 
 function create($table, $fields){
+  $pdo = connect();
+  
   /* Se fields(dados) não for um array, transforma em array */
   if(!is_array($fields)){
     $fields = (array) $fields;
@@ -31,7 +33,6 @@ function create($table, $fields){
   $sql.= implode(', ', $update_arr);
   $sql.= ", vigente = VALUES(vigente)";
   $sql.= ";";
-  $pdo = connect();
 
   $insert = $pdo->prepare($sql);
   return $insert->execute($fields);
@@ -57,18 +58,20 @@ function find($table, $field, $value){
   $sql.= "WHERE {$field} = :{$field};";
 
   $find = $pdo->prepare($sql);
+  /* Troca o valor do primeiro parametro pelo do segundo $field = $value nesse caso */
   $find->bindValue($field, $value);
   $find->execute();
   return $find->fetch();
 }
 
 function update($table, $fields, $where){
+  $pdo = connect();
+  
   /* Se fields(dados) não for um array, transforma em array */
   if(!is_array($fields)){
     $fields = (array) $fields;
   }
 
-  $pdo = connect();
 
   /* Montar a query com array_map de acordo que fique key = :key (id = :id, name = :name...)  */
   $data = array_map(function($field){
@@ -79,17 +82,25 @@ function update($table, $fields, $where){
   $sql.= implode(', ', $data);
   $sql.= " WHERE {$where[0]} = :{$where[0]}";
 
-  /* Fazer o merge nos dois array (fields e where) */
+  /* Fazer o merge nos dois array (fields e where indice 0 está o key e indice 1 está o value) */
   $data = array_merge($fields, [$where[0]=>$where[1]]);
 
   $update = $pdo->prepare($sql);
   $update->execute($data);
+  /* rowCount - contagem de quantas linhas ele alterou se vier 0 = false (não alterou)*/
   return $update->rowCount();
 
 }
 
-function delete($data){
+function delete($table, $field, $value){
+  $pdo = connect();
 
+  $sql = "DELETE FROM {$table} WHERE id = :{$field}";
+  $delete = $pdo->prepare($sql);
+  /* Troca o valor do primeiro parametro pelo do segundo $field = $value nesse caso */
+  $delete->bindValue($field, $value);
+  
+  return $delete->execute();
 }
 
 ?>
