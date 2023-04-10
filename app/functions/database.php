@@ -42,7 +42,7 @@ function all($table){
   $pdo = connect();
 
   /* Selecionar tudo da table enviada por parametro */
-  $sql = "SELECT * FROM {$table}";
+  $sql = "SELECT * FROM {$table} WHERE vigente = 'S'";
   $list = $pdo->query($sql);
   $list->execute();
   return $list->fetchAll();
@@ -95,7 +95,8 @@ function update($table, $fields, $where){
 function delete($table, $field, $value){
   $pdo = connect();
 
-  $sql = "DELETE FROM {$table} WHERE id = :{$field}";
+  /* $sql = "DELETE FROM {$table} WHERE id = :{$field}"; */
+  $sql = "UPDATE {$table} SET vigente = 'N' WHERE id = :{$field};";
   $delete = $pdo->prepare($sql);
   /* Troca o valor do primeiro parametro pelo do segundo $field = $value nesse caso */
   $delete->bindValue($field, $value);
