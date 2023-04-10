@@ -21,19 +21,17 @@ function create($table, $fields){
   /* Montagem de query */
   /* Inserir na table que receber de parametro nessa função */
   $sql = "INSERT INTO {$table} ";
-  $sql.= "(". implode(', ', array_keys($fields)).", vigente)";
-  $sql.= " values (:". implode(', :', array_keys($fields)).", 'S')";
+  $sql.= "(". implode(', ', array_keys($fields)) .", vigente)";
+  $sql.= " VALUES (:". implode(', :', array_keys($fields)) .", 'S')";
   $sql.= " ON DUPLICATE KEY UPDATE ";
-
   $update_arr = array();
   foreach ($fields as $key => $value) {
-      $update_arr[] = $key . " = VALUES(".$key.")";
+      $update_arr[] = $key . " = :" . $key;
   }
-
   $sql.= implode(', ', $update_arr);
-  $sql.= ", vigente = VALUES(vigente)";
-  $sql.= ";";
+  $sql.= ", vigente = 'S';";
 
+  vd($sql);
   $insert = $pdo->prepare($sql);
   return $insert->execute($fields);
 }

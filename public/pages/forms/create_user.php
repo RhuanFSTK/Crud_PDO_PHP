@@ -16,11 +16,10 @@ $validate = validate([
 
 
 $registered = create('users', $validate);
-vd($registered);
 
 if($registered){  
   flash('message', 'Registered successfully','success');
-  return redirect('create_user');
+  return redirect('users');
 }
 
 flash('message', 'Registered error');
