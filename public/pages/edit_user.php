@@ -1,10 +1,6 @@
-
 <?php 
-
-$user = find('users', 'id', $_POST['id']) ;
-
+$user = find('users', 'id', $_REQUEST['id']) ;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +13,7 @@ $user = find('users', 'id', $_POST['id']) ;
   <div class="form-signin d-flex justify-content-center">
     <div class="card col-12">
       <div class="card-header d-flex justify-content-between col-md-12">
-        <div>
+        <div> 
           <legend>Edit account</legend>
         </div>
         <div class="">
@@ -25,8 +21,9 @@ $user = find('users', 'id', $_POST['id']) ;
         </div>
       </div>
       <div class="card-body bg-light">
+        <?= get('message') ?>
         <form action="/pages/forms/update_user.php" method="post" role="form">
-          <input type="hidden" name="id" value="<?= $user->id; ?>">
+          <input type="hidden" name="id" id="id" value="<?= $user->id; ?>">
           <div class="form-group">
             <label for="">Name</label>
             <input type="text" class="form-control mb-1 col-6" name="name" value="<?= $user->name; ?>">

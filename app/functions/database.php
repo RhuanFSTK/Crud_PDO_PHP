@@ -11,6 +11,8 @@ function connect(){
 }
 
 function create($table, $fields){
+  $pdo = connect();
+  
   /* Se fields(dados) não for um array, transforma em array */
   if(!is_array($fields)){
     $fields = (array) $fields;
@@ -19,20 +21,17 @@ function create($table, $fields){
   /* Montagem de query */
   /* Inserir na table que receber de parametro nessa função */
   $sql = "INSERT INTO {$table} ";
-  $sql.= "(". implode(', ', array_keys($fields)).", vigente)";
-  $sql.= " values (:". implode(', :', array_keys($fields)).", 'S')";
+  $sql.= "(". implode(', ', array_keys($fields)) .", vigente)";
+  $sql.= " VALUES (:". implode(', :', array_keys($fields)) .", 'S')";
   $sql.= " ON DUPLICATE KEY UPDATE ";
-
   $update_arr = array();
   foreach ($fields as $key => $value) {
-      $update_arr[] = $key . " = VALUES(".$key.")";
+      $update_arr[] = $key . " = :" . $key;
   }
-
   $sql.= implode(', ', $update_arr);
-  $sql.= ", vigente = VALUES(vigente)";
-  $sql.= ";";
-  $pdo = connect();
+  $sql.= ", vigente = 'S';";
 
+  vd($sql);
   $insert = $pdo->prepare($sql);
   return $insert->execute($fields);
 }
@@ -41,7 +40,7 @@ function all($table){
   $pdo = connect();
 
   /* Selecionar tudo da table enviada por parametro */
-  $sql = "SELECT * FROM {$table}";
+  $sql = "SELECT * FROM {$table} WHERE vigente = 'S'";
   $list = $pdo->query($sql);
   $list->execute();
   return $list->fetchAll();
@@ -57,19 +56,50 @@ function find($table, $field, $value){
   $sql.= "WHERE {$field} = :{$field};";
 
   $find = $pdo->prepare($sql);
+  /* Troca o valor do primeiro parametro pelo do segundo $field = $value nesse caso */
   $find->bindValue($field, $value);
   $find->execute();
   return $find->fetch();
 }
 
-function update($data){
-  /* UPDATE $table SET $fields = 'dados novo' WHERE id = '$id' AND vigente = 'S'; */
-  /* $sql = "INSERT INTO {$table} "; */
+function update($table, $fields, $where){
+  $pdo = connect();
+  
+  /* Se fields(dados) não for um array, transforma em array */
+  if(!is_array($fields)){
+    $fields = (array) $fields;
+  }
+
+
+  /* Montar a query com array_map de acordo que fique key = :key (id = :id, name = :name...)  */
+  $data = array_map(function($field){
+    return "{$field} = :{$field}";
+  }, array_keys($fields));
+
+  $sql = "UPDATE {$table} SET ";
+  $sql.= implode(', ', $data);
+  $sql.= " WHERE {$where[0]} = :{$where[0]}";
+
+  /* Fazer o merge nos dois array (fields e where indice 0 está o key e indice 1 está o value) */
+  $data = array_merge($fields, [$where[0]=>$where[1]]);
+
+  $update = $pdo->prepare($sql);
+  $update->execute($data);
+  /* rowCount - contagem de quantas linhas ele alterou se vier 0 = false (não alterou)*/
+  return $update->rowCount();
 
 }
 
-function delete($data){
+function delete($table, $field, $value){
+  $pdo = connect();
 
+  /* $sql = "DELETE FROM {$table} WHERE id = :{$field}"; */
+  $sql = "UPDATE {$table} SET vigente = 'N' WHERE id = :{$field};";
+  $delete = $pdo->prepare($sql);
+  /* Troca o valor do primeiro parametro pelo do segundo $field = $value nesse caso */
+  $delete->bindValue($field, $value);
+  
+  return $delete->execute();
 }
 
 ?>

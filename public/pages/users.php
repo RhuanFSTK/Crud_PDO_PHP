@@ -32,7 +32,7 @@ require "../vendor/autoload.php";
               <input type="hidden" name="id" value="<?= $user->id; ?>">
                 <td class="align-middle text-center"><button class="btn" href="?page=edit_user"><i class="fas fa-edit text-primary"></i></button></td>
             </form>
-            <form action="delete_user" method="post">
+            <form action="?page=delete_user" method="post">
               <input type="hidden" name="id" value="<?= $user->id; ?>">
              <td class="align-middle text-center"><button class="btn" href="?page=delete_user"><i class="fas fa-trash-alt text-danger"></i></button></td>
             </form>
