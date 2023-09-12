@@ -1,5 +1,6 @@
 <?php
 require "../vendor/autoload.php";
+flash('message', 'Successfully updated','success');
 ?>
 
 <div class="card">
